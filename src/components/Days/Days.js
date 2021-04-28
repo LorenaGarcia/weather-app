@@ -12,7 +12,7 @@ import {
   TempLeft,
   TempRight,
 } from "./Days.styles";
-import IconWeather from "../../images/clear.png";
+import IconWeather from "../../images/lightCloud.png";
 
 const Days = () => {
   return (
@@ -34,7 +34,7 @@ const Days = () => {
         </Weather>
 
         <Weather>
-          <Title>Tomorrow</Title>
+          <Title>Sun, 7 Jun</Title>
           <div>
             <Image src={IconWeather} />
           </div>

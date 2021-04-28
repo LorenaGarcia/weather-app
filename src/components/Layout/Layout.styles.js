@@ -56,7 +56,7 @@ const DaysContainer = styled.div`
 const Wheater = styled.div`
   grid-area: wheater;
   background-color: #100e1d;
-  padding: 4rem;
+  padding: 3rem;
   padding-top: 0;
   padding-bottom: 2rem;
   text-align: center;
@@ -84,6 +84,7 @@ const Footer = styled.div`
   line-height: 17px;
   text-align: center;
   color: #a09fb1;
+  padding-top: 4rem;
 `;
 
 export { Container, LocationContainer, DaysContainer, Wheater, Footer };

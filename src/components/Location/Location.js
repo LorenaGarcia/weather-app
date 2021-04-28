@@ -30,10 +30,12 @@ const Location = () => {
       <Information>
         <Weather>15℃</Weather>
         <Description>Shower</Description>
-        <Date>Today - Fri, 5 Jun</Date>
-        <Place>
-          <span class="material-icons">place</span>Helsinki
-        </Place>
+        <div>
+          <Date>Today - Fri, 5 Jun</Date>
+          <Place>
+            <span class="material-icons">place</span>Helsinki
+          </Place>
+        </div>
       </Information>
     </Container>
   );

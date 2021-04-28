@@ -8,6 +8,7 @@ import {
 } from "./Layout.styles";
 import { Location } from "../Location/Location";
 import { Days } from "../Days/Days";
+import { Hightlights } from "../Hightlights/Hightlights";
 
 const Layout = ({ children }) => {
   return (
@@ -18,7 +19,9 @@ const Layout = ({ children }) => {
       <DaysContainer>
         <Days />
       </DaysContainer>
-      <Wheater></Wheater>
+      <Wheater>
+        <Hightlights />
+      </Wheater>
       <Footer>created by Lorraine </Footer>
     </Container>
   );

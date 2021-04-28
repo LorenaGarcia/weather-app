@@ -14,7 +14,7 @@ const Container = styled.div`
 const Image = styled.div`
   position: relative;
   height: 100%;
-  max-height: 18rem;
+  max-height: 20rem;
   width: 100%;
   display: flex;
   align-items: center;
@@ -76,8 +76,13 @@ const ButtonLocation = styled.button`
 `;
 
 const ImageWeather = styled.img`
-  width: 50%;
+  width: 40%;
   max-width: 200px;
+  padding: 4rem;
+
+  @media (max-width: 480px) {
+    padding: 6rem;
+  }
 `;
 
 const Information = styled.div`
@@ -85,10 +90,15 @@ const Information = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-  margin-top: 1rem;
-  margin-bottom: 2rem;
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+
+  @media (min-width: 481px) and (max-width: 950px) {
+    margin-top: 15rem;
+    margin-bottom: 15rem;
+  }
 `;
 
 const Weather = styled.p`
@@ -96,9 +106,9 @@ const Weather = styled.p`
   font-style: normal;
   font-weight: 500;
   font-size: 100px;
-  line-height: 169px;
   margin: 0;
   color: #e7e7eb;
+  margin-bottom: 0.5rem;
 
   @media (max-width: 480px) {
     font-size: 80px;
@@ -114,10 +124,9 @@ const Description = styled.div`
   font-style: normal;
   font-weight: 600;
   font-size: 36px;
-  line-height: 42px;
   text-align: center;
   color: #a09fb1;
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
 `;
 
 const Place = styled.div`
