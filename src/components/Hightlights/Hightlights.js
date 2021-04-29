@@ -8,6 +8,9 @@ import {
   Description,
   ButtonIcon,
   TitleSection,
+  ContainerProgress,
+  NumbersProgress,
+  Percent,
 } from "../Hightlights/Hightlights.styles";
 
 const Hightlights = () => {
@@ -33,12 +36,14 @@ const Hightlights = () => {
           <Number>
             84 <p>%</p>
           </Number>
-          <Description>
-            <ButtonIcon>
-              <span class="material-icons">near_me</span>
-            </ButtonIcon>
-            WSW
-          </Description>
+          <ContainerProgress>
+            <NumbersProgress>
+              <p>0</p> <p>50</p>
+              <p>100</p>
+            </NumbersProgress>
+            <progress value="84" max="100" />
+            <Percent>%</Percent>
+          </ContainerProgress>
         </Card>
 
         <Card>
