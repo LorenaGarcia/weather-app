@@ -12,31 +12,71 @@ import {
   Place,
   Date,
 } from "./Location.styles";
-import IconWeather from "../../images/clear.png";
+import { Spinner } from "../Spinner";
 
-const Location = () => {
+const Location = ({
+  showSearch,
+  setShowSearch,
+  data,
+  isLoading,
+  imagesWeather,
+  today,
+  getLocation,
+}) => {
+  function sumarDias(fecha, dias) {
+    fecha.setDate(fecha.getDate() + dias);
+    return fecha;
+  }
+
+  var dayyy = new window.Date();
+
+  console.log("days", sumarDias(dayyy, +5));
+
   return (
     <Container>
       <ContainerSearch>
-        <ButtonSearch>Search for places</ButtonSearch>
-        <ButtonLocation>
-          <span class="material-icons">my_location</span>
+        <ButtonSearch onClick={() => setShowSearch(!showSearch)}>
+          Search for places
+        </ButtonSearch>
+        <ButtonLocation onClick={getLocation}>
+          <span className="material-icons">my_location</span>
         </ButtonLocation>
       </ContainerSearch>
 
-      <Image>
-        <ImageWeather src={IconWeather} alt="weather" />
-      </Image>
-      <Information>
-        <Weather>15℃</Weather>
-        <Description>Shower</Description>
-        <div>
-          <Date>Today - Fri, 5 Jun</Date>
-          <Place>
-            <span class="material-icons">place</span>Helsinki
-          </Place>
-        </div>
-      </Information>
+      {isLoading || !data.title ? (
+        <Spinner />
+      ) : (
+        data.title && (
+          <>
+            <Image>
+              <ImageWeather
+                src={
+                  data.title &&
+                  imagesWeather(data.consolidated_weather[0].weather_state_abbr)
+                }
+                alt="weather"
+              />
+            </Image>
+            <Information>
+              <Weather>
+                {data.consolidated_weather &&
+                  parseInt(data.consolidated_weather[0].the_temp)}
+                ℃
+              </Weather>
+              <Description>
+                {data.consolidated_weather[0].weather_state_name}
+              </Description>
+              <div>
+                <Date>{today}</Date>
+                <Place>
+                  <span className="material-icons">place</span>
+                  <p>{data.title}</p>
+                </Place>
+              </div>
+            </Information>
+          </>
+        )
+      )}
     </Container>
   );
 };

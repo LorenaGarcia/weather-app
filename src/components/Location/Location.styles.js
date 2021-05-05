@@ -90,14 +90,13 @@ const Information = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  margin-top: 4rem;
   margin-bottom: 4rem;
 
   @media (min-width: 481px) and (max-width: 950px) {
-    margin-top: 15rem;
-    margin-bottom: 15rem;
+    /* margin-top: 15rem;
+    margin-bottom: 15rem; */
   }
 `;
 
@@ -108,7 +107,7 @@ const Weather = styled.p`
   font-size: 100px;
   margin: 0;
   color: #e7e7eb;
-  margin-bottom: 0.5rem;
+  margin-bottom: 7rem;
 
   @media (max-width: 480px) {
     font-size: 80px;
@@ -126,7 +125,7 @@ const Description = styled.div`
   font-size: 36px;
   text-align: center;
   color: #a09fb1;
-  margin-bottom: 2rem;
+  margin-bottom: 5rem;
 `;
 
 const Place = styled.div`
@@ -137,6 +136,7 @@ const Place = styled.div`
 
 const Date = styled.p`
   margin: 0;
+  text-align: center;
   font-family: "Raleway", sans-serif;
   font-style: normal;
   font-weight: 500;

@@ -12,54 +12,64 @@ import {
   NumbersProgress,
   Percent,
 } from "../Hightlights/Hightlights.styles";
+import { Spinner } from "../Spinner";
 
-const Hightlights = () => {
+const Hightlights = ({ data, isLoading }) => {
   return (
     <Container>
       <TitleSection>Today’s Hightlights</TitleSection>
-      <ContainerGrid>
-        <Card>
-          <Title>Wind status</Title>
-          <Number>
-            7 <p>mph</p>
-          </Number>
-          <Description>
-            <ButtonIcon>
-              <span class="material-icons">near_me</span>
-            </ButtonIcon>
-            WSW
-          </Description>
-        </Card>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        data.title && (
+          <ContainerGrid>
+            <Card>
+              <Title>Wind status</Title>
+              <Number>
+                {parseInt(data.consolidated_weather[0].wind_speed)} <p>mph</p>
+              </Number>
+              <Description>
+                <ButtonIcon>
+                  <span className="material-icons">near_me</span>
+                </ButtonIcon>
+                WSW
+              </Description>
+            </Card>
 
-        <Card>
-          <Title>Humidity</Title>
-          <Number>
-            84 <p>%</p>
-          </Number>
-          <ContainerProgress>
-            <NumbersProgress>
-              <p>0</p> <p>50</p>
-              <p>100</p>
-            </NumbersProgress>
-            <progress value="84" max="100" />
-            <Percent>%</Percent>
-          </ContainerProgress>
-        </Card>
+            <Card>
+              <Title>Humidity</Title>
+              <Number>
+                {data.consolidated_weather[0].humidity} <p>%</p>
+              </Number>
+              <ContainerProgress>
+                <NumbersProgress>
+                  <p>0</p> <p>50</p>
+                  <p>100</p>
+                </NumbersProgress>
+                <progress
+                  value={data.consolidated_weather[0].humidity}
+                  max="100"
+                />
+                <Percent>%</Percent>
+              </ContainerProgress>
+            </Card>
 
-        <Card>
-          <Title>Visibility</Title>
-          <Number>
-            6,4 <p>miles</p>
-          </Number>
-        </Card>
+            <Card>
+              <Title>Visibility</Title>
+              <Number>
+                {parseInt(data.consolidated_weather[0].visibility)} <p>miles</p>
+              </Number>
+            </Card>
 
-        <Card>
-          <Title>Air Pressure</Title>
-          <Number>
-            998 <p>mb</p>
-          </Number>
-        </Card>
-      </ContainerGrid>
+            <Card>
+              <Title>Air Pressure</Title>
+              <Number>
+                {parseInt(data.consolidated_weather[0].air_pressure)} <p>mb</p>
+              </Number>
+            </Card>
+          </ContainerGrid>
+        )
+      )}
     </Container>
   );
 };

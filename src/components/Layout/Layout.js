@@ -1,27 +1,35 @@
 import React from "react";
-import {
-  Container,
-  LocationContainer,
-  DaysContainer,
-  Wheater,
-  Footer,
-} from "./Layout.styles";
-import { Location } from "../Location/Location";
-import { Days } from "../Days/Days";
-import { Hightlights } from "../Hightlights/Hightlights";
+import { Container, LocationContainer, Footer } from "./Layout.styles";
+import { Location } from "../Location";
+import { Search } from "../Search";
 
-const Layout = ({ children }) => {
+const Layout = ({
+  children,
+  setShowSearch,
+  showSearch,
+  dataLocation,
+  isLoading,
+  imagesWeather,
+  today,
+  getLocation,
+}) => {
   return (
     <Container>
       <LocationContainer>
-        <Location />
+        {showSearch ? (
+          <Search setShowSearch={setShowSearch} />
+        ) : (
+          <Location
+            setShowSearch={setShowSearch}
+            data={dataLocation}
+            isLoading={isLoading}
+            imagesWeather={imagesWeather}
+            today={today}
+            getLocation={getLocation}
+          />
+        )}
       </LocationContainer>
-      <DaysContainer>
-        <Days />
-      </DaysContainer>
-      <Wheater>
-        <Hightlights />
-      </Wheater>
+      {children}
       <Footer>created by Lorraine </Footer>
     </Container>
   );
