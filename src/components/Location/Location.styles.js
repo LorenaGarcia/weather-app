@@ -100,7 +100,13 @@ const Information = styled.div`
   }
 `;
 
-const Weather = styled.p`
+const Weather = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
   font-family: "Raleway", sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -108,6 +114,17 @@ const Weather = styled.p`
   margin: 0;
   color: #e7e7eb;
   margin-bottom: 7rem;
+
+  p {
+    margin: 0;
+    font-family: "Raleway", sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 45px;
+    text-align: center;
+    margin-top: 1.5rem;
+    color: #a09fb1;
+  }
 
   @media (max-width: 480px) {
     font-size: 80px;

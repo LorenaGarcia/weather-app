@@ -12,78 +12,69 @@ import {
   TempLeft,
   TempRight,
 } from "./Days.styles";
-import IconWeather from "../../images/lightCloud.png";
-import { Spinner } from "../Spinner";
 
-const Days = ({ data, isLoading }) => {
+const Days = ({
+  data,
+  isLoading,
+  imagesWeather,
+  setFarenheit,
+  farenheit,
+  conversion,
+}) => {
+  function moreDays(days) {
+    const today = new window.Date();
+    var options = {
+      weekday: "short",
+      day: "numeric",
+      month: "short",
+    };
+
+    if (days === 1) {
+      return "Tomorrow";
+    } else {
+      today.setDate(today.getDate() + days);
+      return today.toLocaleDateString("en-EN", options);
+    }
+  }
+
   return (
     <Container>
       <Options>
-        <ButtonC>℃</ButtonC>
-        <ButtonF>℉</ButtonF>
+        <ButtonC onClick={() => setFarenheit(false)}>℃</ButtonC>
+        <ButtonF onClick={() => setFarenheit(true)}>℉</ButtonF>
       </Options>
 
-      {isLoading ? (
-        <Spinner />
-      ) : (
-        data.title && (
-          <ContainerGrid>
-            <Weather>
-              <Title>Tomorrow</Title>
-              <div>
-                <Image src={IconWeather} />
-              </div>
-              <Temperature>
-                <TempLeft>16°C</TempLeft>
-                <TempRight>11°C</TempRight>
-              </Temperature>
-            </Weather>
+      {!isLoading && data.title && (
+        <ContainerGrid>
+          {data.consolidated_weather.map(
+            (value, index) =>
+              data.consolidated_weather[0].id !== value.id && (
+                <Weather key={index}>
+                  <Title>{moreDays(index)}</Title>
+                  <div>
+                    <Image src={imagesWeather(value.weather_state_abbr)} />
+                  </div>
+                  <Temperature>
+                    {farenheit ? (
+                      <TempLeft>
+                        {parseInt(conversion(value.max_temp))} ℉
+                      </TempLeft>
+                    ) : (
+                      <TempLeft>{parseInt(value.max_temp)}°C</TempLeft>
+                    )}
 
-            <Weather>
-              <Title>Sun, 7 Jun</Title>
-              <div>
-                <Image src={IconWeather} />
-              </div>
-              <Temperature>
-                <TempLeft>16°C</TempLeft>
-                <TempRight>11°C</TempRight>
-              </Temperature>
-            </Weather>
-
-            <Weather>
-              <Title>Tomorrow</Title>
-              <div>
-                <Image src={IconWeather} />
-              </div>
-              <Temperature>
-                <TempLeft>16°C</TempLeft>
-                <TempRight>11°C</TempRight>
-              </Temperature>
-            </Weather>
-
-            <Weather>
-              <Title>Tomorrow</Title>
-              <div>
-                <Image src={IconWeather} />
-              </div>
-              <Temperature>
-                <TempLeft>16°C</TempLeft>
-                <TempRight>11°C</TempRight>
-              </Temperature>
-            </Weather>
-
-            <Weather>
-              <Title>Tomorrow</Title>
-              <div>
-                <Image src={IconWeather} />
-              </div>
-              <Temperature>
-                <TempLeft>16°C</TempLeft>
-                <TempRight>11°C</TempRight>
-              </Temperature>
-            </Weather>
-          </ContainerGrid>
-        )
+                    {farenheit ? (
+                      <TempRight>
+                        {parseInt(conversion(value.min_temp))} ℉
+                      </TempRight>
+                    ) : (
+                      <TempRight>{parseInt(value.min_temp)}°C</TempRight>
+                    )}
+                  </Temperature>
+                </Weather>
+              )
+          )}
+        </ContainerGrid>
       )}
     </Container>
   );

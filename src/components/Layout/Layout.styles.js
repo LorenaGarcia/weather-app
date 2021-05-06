@@ -39,7 +39,7 @@ const LocationContainer = styled.div`
 const DaysContainer = styled.div`
   grid-area: days;
   background-color: #100e1d;
-  padding: 3rem;
+  padding: 1.5rem;
   padding-top: 2rem;
   padding-bottom: 2rem;
   text-align: center;
@@ -56,7 +56,7 @@ const DaysContainer = styled.div`
 const Wheater = styled.div`
   grid-area: wheater;
   background-color: #100e1d;
-  padding: 3rem;
+  padding: 1.5rem;
   padding-top: 0;
   padding-bottom: 2rem;
   text-align: center;

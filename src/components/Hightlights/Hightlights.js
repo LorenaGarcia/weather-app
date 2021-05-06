@@ -12,16 +12,13 @@ import {
   NumbersProgress,
   Percent,
 } from "../Hightlights/Hightlights.styles";
-import { Spinner } from "../Spinner";
 
 const Hightlights = ({ data, isLoading }) => {
   return (
     <Container>
-      <TitleSection>Today’s Hightlights</TitleSection>
-      {isLoading ? (
-        <Spinner />
-      ) : (
-        data.title && (
+      {!isLoading && data.title && (
+        <>
+          <TitleSection>Today’s Hightlights</TitleSection>
           <ContainerGrid>
             <Card>
               <Title>Wind status</Title>
@@ -68,7 +65,7 @@ const Hightlights = ({ data, isLoading }) => {
               </Number>
             </Card>
           </ContainerGrid>
-        )
+        </>
       )}
     </Container>
   );

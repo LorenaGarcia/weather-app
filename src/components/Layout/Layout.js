@@ -12,12 +12,28 @@ const Layout = ({
   imagesWeather,
   today,
   getLocation,
+  farenheit,
+  conversion,
+  searchCity,
+  city,
+  setCity,
+  resultsSearch,
+  currentLocation,
+  message,
 }) => {
   return (
     <Container>
       <LocationContainer>
         {showSearch ? (
-          <Search setShowSearch={setShowSearch} />
+          <Search
+            setShowSearch={setShowSearch}
+            searchCity={searchCity}
+            city={city}
+            setCity={setCity}
+            resultsSearch={resultsSearch}
+            currentLocation={currentLocation}
+            message={message}
+          />
         ) : (
           <Location
             setShowSearch={setShowSearch}
@@ -26,6 +42,9 @@ const Layout = ({
             imagesWeather={imagesWeather}
             today={today}
             getLocation={getLocation}
+            farenheit={farenheit}
+            conversion={conversion}
+            message={message}
           />
         )}
       </LocationContainer>

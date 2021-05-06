@@ -13,6 +13,7 @@ import {
   Date,
 } from "./Location.styles";
 import { Spinner } from "../Spinner";
+import { Message } from "../Message";
 
 const Location = ({
   showSearch,
@@ -22,16 +23,10 @@ const Location = ({
   imagesWeather,
   today,
   getLocation,
+  farenheit,
+  conversion,
+  message,
 }) => {
-  function sumarDias(fecha, dias) {
-    fecha.setDate(fecha.getDate() + dias);
-    return fecha;
-  }
-
-  var dayyy = new window.Date();
-
-  console.log("days", sumarDias(dayyy, +5));
-
   return (
     <Container>
       <ContainerSearch>
@@ -42,6 +37,7 @@ const Location = ({
           <span className="material-icons">my_location</span>
         </ButtonLocation>
       </ContainerSearch>
+      {message && <Message message={message} />}
 
       {isLoading || !data.title ? (
         <Spinner />
@@ -59,9 +55,10 @@ const Location = ({
             </Image>
             <Information>
               <Weather>
-                {data.consolidated_weather &&
-                  parseInt(data.consolidated_weather[0].the_temp)}
-                ℃
+                {farenheit
+                  ? parseInt(conversion(data.consolidated_weather[0].the_temp))
+                  : parseInt(data.consolidated_weather[0].the_temp)}
+                {farenheit ? <p>{"℉"}</p> : <p>{"℃"}</p>}
               </Weather>
               <Description>
                 {data.consolidated_weather[0].weather_state_name}

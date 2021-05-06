@@ -85,7 +85,7 @@ const Title = styled.p`
 
 const ContainerGrid = styled.div`
   display: grid;
-  gap: 1rem;
+  gap: 0.7rem;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 
   @media (max-width: 480px) {

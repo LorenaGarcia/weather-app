@@ -5,6 +5,7 @@ import { DaysContainer, Wheater } from "./components/Layout/Layout.styles";
 import { Layout } from "./components/Layout";
 import { Days } from "./components/Days";
 import { Hightlights } from "./components/Hightlights";
+import { Spinner } from "./components/Spinner";
 
 import c from "../src/images/clear.png";
 import lr from "../src/images/lightRain.png";
@@ -23,6 +24,10 @@ function App() {
   const [dataLocation, setDataLocation] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [today, setToday] = useState(null);
+  const [farenheit, setFarenheit] = useState(false);
+  const [city, setCity] = useState(null);
+  const [resultsSearch, setResultsSearch] = useState({});
+  const [message, setMessage] = useState(null);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -36,6 +41,14 @@ function App() {
       getLocation();
     }
   }, [coordsLocation]);
+
+  useEffect(() => {
+    if (message) {
+      setTimeout(() => {
+        setMessage(null);
+      }, 2000);
+    }
+  }, [message]);
 
   useEffect(() => {
     if (dataLocation.time) {
@@ -52,7 +65,6 @@ function App() {
 
   const funcionSiTodoVaBien = (pos) => {
     setIsLoading(true);
-    console.log(pos);
     setCoordsLocation(pos.coords.latitude + "," + pos.coords.longitude);
     setIsLoading(false);
   };
@@ -61,16 +73,19 @@ function App() {
     switch (error.code) {
       case error.PERMISSION_DENIED:
         setCoordsLocation("19.431900,-99.132851");
-        console.log("El usuario denegó el permiso para la Geolocalización");
+        setMessage("Location permission was denied");
         // El usuario denegó el permiso para la Geolocalización.
         break;
       case error.POSITION_UNAVAILABLE:
+        setMessage("Location is not available");
         // La ubicación no está disponible.
         break;
       case error.TIMEOUT:
+        setMessage("An error occurred");
         // Se ha excedido el tiempo para obtener la ubicación.
         break;
       case error.UNKNOWN_ERROR:
+        setMessage("An error occurred");
         // Un error desconocido.
         break;
     }
@@ -92,11 +107,14 @@ function App() {
 
   const currentLocation = async (woeid) => {
     setIsLoading(true);
+    setShowSearch(false);
+    setCity("");
     try {
       const { data } = await axios.get(
         `https://api.allorigins.win/raw?url=https://www.metaweather.com/api/location/${woeid}/`
       );
       setDataLocation(data);
+      setResultsSearch({});
       setIsLoading(false);
     } catch (error) {
       console.error(error);
@@ -130,7 +148,30 @@ function App() {
     }
   };
 
-  console.log("dia", today);
+  const conversion = (celsius) => {
+    setIsLoading(true);
+    var farenheit = (celsius * 9) / 5 + 32;
+    setIsLoading(false);
+    return farenheit;
+  };
+
+  const searchCity = async () => {
+    if (city) {
+      setIsLoading(true);
+      try {
+        const { data } = await axios.get(
+          `https://api.allorigins.win/raw?url=https://www.metaweather.com/api/location/search/?query=${city}`
+        );
+        setResultsSearch(data);
+        setIsLoading(false);
+      } catch (error) {
+        console.error(error);
+        setIsLoading(false);
+      }
+    } else {
+      setMessage("Enter a city");
+    }
+  };
 
   return (
     <Layout
@@ -141,13 +182,39 @@ function App() {
       imagesWeather={imagesWeather}
       today={today}
       getLocation={getLocation}
+      farenheit={farenheit}
+      conversion={conversion}
+      searchCity={searchCity}
+      city={city}
+      setCity={setCity}
+      resultsSearch={resultsSearch}
+      currentLocation={currentLocation}
+      message={message}
     >
-      <DaysContainer>
-        <Days isLoading={isLoading} data={dataLocation} />
-      </DaysContainer>
-      <Wheater>
-        <Hightlights isLoading={isLoading} data={dataLocation} />
-      </Wheater>
+      {isLoading ? (
+        <>
+          <DaysContainer>
+            <Spinner />
+          </DaysContainer>
+          <Wheater></Wheater>
+        </>
+      ) : (
+        <>
+          <DaysContainer>
+            <Days
+              setFarenheit={setFarenheit}
+              farenheit={farenheit}
+              conversion={conversion}
+              isLoading={isLoading}
+              data={dataLocation}
+              imagesWeather={imagesWeather}
+            />
+          </DaysContainer>
+          <Wheater>
+            <Hightlights isLoading={isLoading} data={dataLocation} />
+          </Wheater>
+        </>
+      )}
     </Layout>
   );
 }

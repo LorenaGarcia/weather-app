@@ -6,11 +6,22 @@ import {
   ContainerInputs,
   Button,
   Input,
-  Select,
+  InputResult,
   Icon,
+  IconResult,
+  ContainerInputResult,
 } from "./Search.styles";
+import { Message } from "../Message";
 
-const Search = ({ setShowSearch }) => {
+const Search = ({
+  setShowSearch,
+  searchCity,
+  city,
+  setCity,
+  resultsSearch,
+  currentLocation,
+  message,
+}) => {
   return (
     <Container>
       <Close onClick={() => setShowSearch(false)}>
@@ -22,18 +33,27 @@ const Search = ({ setShowSearch }) => {
             <span className="material-icons">search</span>
           </Icon>
 
-          <Input placeholder="search location" />
-          <Button>Search</Button>
+          <Input
+            onChange={(e) => setCity(e.target.value)}
+            defaultValue={city}
+            placeholder="search location"
+          />
+          <Button onClick={searchCity}>Search</Button>
         </ContainerInputs>
-
-        <Select name="select">
-          <option value="value1">Value 1</option>
-          <option value="value2" selected>
-            Value 2
-          </option>
-          <option value="value3">Value 3</option>
-        </Select>
+        {resultsSearch.length >= 1 &&
+          resultsSearch.map((value, index) => (
+            <ContainerInputResult
+              key={index}
+              onClick={() => currentLocation(value.woeid)}
+            >
+              <IconResult>
+                <span className="material-icons">chevron_right</span>
+              </IconResult>
+              <InputResult value={value.title} disabled />
+            </ContainerInputResult>
+          ))}
       </Form>
+      {message && <Message message={message} />}
     </Container>
   );
 };

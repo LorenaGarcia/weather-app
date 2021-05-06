@@ -26,6 +26,7 @@ const ContainerInputs = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 2rem;
 `;
 
 const Button = styled.button`
@@ -55,16 +56,29 @@ const Input = styled.input`
   font-weight: 600;
   font-size: 16px;
   color: #616475;
+
+  :focus-visible {
+    outline: none;
+  }
 `;
 
-const Select = styled.select`
+const InputResult = styled.input`
   width: 100%;
-  height: 64px;
-  margin-top: 2rem;
+  padding-left: 2.2rem;
+  height: 48px;
   background: transparent;
-  color: #e7e7eb;
-  border: 1px solid #e7e7eb;
+  border: 1px solid #616475;
   box-sizing: border-box;
+  font-family: "Raleway", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  color: #616475;
+  cursor: pointer;
+
+  :focus-visible {
+    outline: none;
+  }
 `;
 
 const Icon = styled.div`
@@ -72,4 +86,39 @@ const Icon = styled.div`
   padding-left: 0.5rem;
 `;
 
-export { Container, Close, Form, ContainerInputs, Button, Input, Select, Icon };
+const IconResult = styled.div`
+  left: 26%;
+  position: absolute;
+  color: #828282;
+
+  @media (max-width: 480px) {
+    right: 1.5rem;
+    left: 80%;
+  }
+
+  @media (min-width: 481px) and (max-width: 950px) {
+    left: 30%;
+  }
+`;
+
+const ContainerInputResult = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+`;
+
+export {
+  Container,
+  Close,
+  Form,
+  ContainerInputs,
+  Button,
+  Input,
+  InputResult,
+  Icon,
+  IconResult,
+  ContainerInputResult,
+};
