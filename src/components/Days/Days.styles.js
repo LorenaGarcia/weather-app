@@ -22,7 +22,7 @@ const ButtonC = styled.button`
   height: 40px;
   left: 1223px;
   top: 42px;
-  background: #e7e7eb;
+  background: ${(props) => (props.farenheit ? "#e7e7eb" : "#585676")};
   border-radius: 54px;
   border: 0;
   font-family: "Raleway", sans-serif;
@@ -30,7 +30,7 @@ const ButtonC = styled.button`
   font-weight: bold;
   font-size: 18px;
   line-height: 21px;
-  color: #110e3c;
+  color: ${(props) => (props.farenheit ? "#110e3c" : "#e7e7eb")};
   margin-right: 2rem;
   cursor: pointer;
 `;
@@ -40,7 +40,7 @@ const ButtonF = styled.button`
   height: 40px;
   left: 1223px;
   top: 42px;
-  background: #585676;
+  background: ${(props) => (props.farenheit ? "#585676" : "#e7e7eb")};
   border-radius: 54px;
   border: 0;
   font-family: "Raleway", sans-serif;
@@ -48,7 +48,7 @@ const ButtonF = styled.button`
   font-weight: bold;
   font-size: 18px;
   line-height: 21px;
-  color: #e7e7eb;
+  color: ${(props) => (props.farenheit ? "#e7e7eb" : "#110e3c")};
   cursor: pointer;
 `;
 

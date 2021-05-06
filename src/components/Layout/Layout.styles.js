@@ -23,7 +23,7 @@ const Container = styled.div`
 
   @media (min-width: 481px) and (max-width: 950px) {
     grid-template-rows: 1fr 1fr auto;
-    grid-template-columns: 18rem 1fr;
+    grid-template-columns: 1fr 1fr;
     grid-template-areas:
       "location days"
       "location wheater"

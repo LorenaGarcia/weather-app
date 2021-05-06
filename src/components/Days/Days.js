@@ -40,8 +40,12 @@ const Days = ({
   return (
     <Container>
       <Options>
-        <ButtonC onClick={() => setFarenheit(false)}>℃</ButtonC>
-        <ButtonF onClick={() => setFarenheit(true)}>℉</ButtonF>
+        <ButtonC farenheit={farenheit} onClick={() => setFarenheit(false)}>
+          ℃
+        </ButtonC>
+        <ButtonF farenheit={farenheit} onClick={() => setFarenheit(true)}>
+          ℉
+        </ButtonF>
       </Options>
 
       {!isLoading && data.title && (
