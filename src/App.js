@@ -30,10 +30,7 @@ function App() {
   const [message, setMessage] = useState(null);
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      funcionSiTodoVaBien,
-      errorGeolocation
-    );
+    navigator.geolocation.getCurrentPosition(getCoords, errorGeolocation);
   }, []);
 
   useEffect(() => {
@@ -63,7 +60,7 @@ function App() {
     }
   }, [dataLocation]);
 
-  const funcionSiTodoVaBien = (pos) => {
+  const getCoords = (pos) => {
     setIsLoading(true);
     setCoordsLocation(pos.coords.latitude + "," + pos.coords.longitude);
     setIsLoading(false);
